@@ -56,4 +56,4 @@ def make_country_df(country):
     return final_df
 
 countries_df = daily_df[["Country_Region", "Confirmed", "Deaths", "Recovered"]]
-countries_df = countries_df.groupby("Country_Region").sum().reset_index() 
+countries_df = countries_df.groupby("Country_Region").sum().sort_values(by='Confirmed', ascending=False).reset_index()
