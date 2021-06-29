@@ -5,6 +5,8 @@ import dash_html_components as html
 import plotly.express as px
 from builder import make_table
 from data import countries_df
+from coronaMap import corona_map
+from bar import bar_chart
 
 stylesheets = [
     'https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css',
@@ -31,12 +33,31 @@ app.layout = html.Div(
             ]
         ),
         html.Div(
+            style={
+                'display':'grid',
+                'gap': 30,
+                'gridTemplateColumns':'repeat(4, 1fr)'
+            },
             children=[
                 html.Div(
+                    children = [make_table(countries_df)]
+                ),
+                html.Div(
+                    style={"grid-column": "span 3"},
                     children=[
-                        make_table(countries_df)
+                        dcc.Graph(figure=corona_map)
                     ]
                 )
+            ]
+        ),
+        html.Div(
+            style={
+                "display": "grid",
+                "gap": 50,
+                "gridTemplateColumns": "repeat(4, 1fr)",
+            },
+            children=[
+                html.Div(children=[dcc.Graph(figure=bar_chart)])
             ]
         )
     ]
